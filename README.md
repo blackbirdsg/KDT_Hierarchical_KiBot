@@ -1,4 +1,4 @@
-<h1 align="center">KiCad 8/9 Template for CI/CD with KiBot</h1>
+<h1 align="center">KiCad 10 Template for Documentation with KiBot</h1>
 
 <p align="center">
   <a href=https://www.kicad.org/>
@@ -10,9 +10,13 @@
   </a>
 </p>
 
-A **KiCad 8/9** template for **automated**, professional documentation generation with **Continuous Integration and Continuous Development** (CI/CD) using [KiBot](https://github.com/INTI-CMNB/KiBot/tree/master).
+A **KiCad 10 compatibility development fork** of [Vincent Nguyen's KiCad 8/9 template](https://github.com/nguyen-v/KDT_Hierarchical_KiBot), using [KiBot](https://github.com/INTI-CMNB/KiBot) for automated board documentation. Development takes place on **`kicad-compatibility`**.
 
-A video tutorial for setting up this template is available [here](https://www.youtube.com/watch?v=63R6Wnx44uY).
+The full 29-target local output group was exercised with **KiCad 10.0.5 and KiBot 1.9.1** on an isolated Nano board copy. Outputs were generated, but board validation failed; this is **experimental support, not a production-qualified workflow**. The inherited GitHub Actions workflow still handles KiCad 8/9 only and has not been ported to KiCad 10.
+
+Start with the [KiCad 10 documentation](docs/README.md), [compatibility review](docs/compatibility/kicad10-review.md) and [actual Nano run results](docs/compatibility/nano-full-run.md).
+
+The original **KiCad 9** video tutorial is available [here](https://www.youtube.com/watch?v=63R6Wnx44uY). It explains the upstream workflow; use this fork's documentation for KiCad 10 differences.
 
 An example project using this template can be found [here](https://github.com/nguyen-v/amulet_controller_kibot/tree/master).
 
@@ -70,18 +74,18 @@ An example project using this template can be found [here](https://github.com/ng
     **Windows**:
 
     ```
-    cd "C:\Program Files\KiCad\8.0\share\kicad\template"
+    cd "C:\Program Files\KiCad\10.0\share\kicad\template"
     ```
 
     **Linux**:
     ```
-    cd ~/.local/share/kicad/8.0/template
+    cd ~/.local/share/kicad/10.0/template
     ```
 
 2. Clone the repository
 
     ```
-    git clone https://github.com/nguyen-v/KDT_Hierarchical_KiBot.git
+    git clone --branch kicad-compatibility https://github.com/blackbirdsg/KDT_Hierarchical_KiBot.git
     ```
 
 3. Install the fonts inside of [`kibot_resources/fonts`](kibot_resources/fonts) if not already installed on the system.
@@ -98,14 +102,14 @@ You should move this file to your KiCad Themes folder.
 
     **Windows**:
 
-    `xcopy "KDT_Hierarchical_KiBot\kibot_resources\colors\Altium_Theme.json" "C:\Users\%USERNAME%\AppData\Roaming\kicad\8.0\colors\" /-Y`
+    `xcopy "KDT_Hierarchical_KiBot\kibot_resources\colors\Altium_Theme.json" "C:\Users\%USERNAME%\AppData\Roaming\kicad\10.0\colors\" /-Y`
 
     **Linux**:
 
-    `cp -i KDT_Hierarchical_KiBot/kibot_resources/colors/Altium_Theme.json ~/.config/kicad/8.0/colors/`
+    `cp -i KDT_Hierarchical_KiBot/kibot_resources/colors/Altium_Theme.json ~/.config/kicad/10.0/colors/`
 
 > [!NOTE]
-> In the steps above, replace ```8.0``` with ```9.0``` for KiCad 9
+> These paths target KiCad 10. The legacy 8/9 launcher options remain available, but this branch's development target is version 10.
 
 5. Create a new project with:
 
@@ -183,7 +187,7 @@ You should move this file to your KiCad Themes folder.
 
 ### CI/CD Workflow and Semantic Versioning
 
-This template is meant to be used in a CI/CD environment on GitHub. The workflow is as follows:
+The following describes the inherited KiCad 8/9 CI/CD workflow, not a validated KiCad 10 pipeline. This fork currently develops and tests KiCad 10 locally on `kicad-compatibility`; automatic publishing has not been qualified.
 
 - Any custom font used in the project must be added to the [`kibot_resources/fonts`](kibot_resources/fonts) folder.
 
@@ -206,7 +210,7 @@ This template is meant to be used in a CI/CD environment on GitHub. The workflow
     kibot_variant: CHECKED  
   ```
 
-- The `kicad_version` variable in [.github/workflows/ci.yaml](.github/workflows/ci.yaml#L24) should be selected according to the desired KiCad version. Supported versions are 8 and 9.
+- The inherited [.github/workflows/ci.yaml](.github/workflows/ci.yaml) contains execution steps for versions 8 and 9 only. **Do not simply change `kicad_version` to 10:** generation can be skipped while later publishing steps remain. See the [KiCad 10 migration plan](docs/compatibility/migration-plan.md).
 
 - You should work locally on the `dev` branch. When a change is made, the changes should be pushed to GitHub which will trigger the KiBot workflow. The generated files will be committed and pushed back to the repository.
 
@@ -262,7 +266,23 @@ The easiest way to install KiBot if custom development is not required is with d
 
 1.  Install **and run** [Docker Desktop](https://docs.docker.com/desktop/)
   
-2.  Run the script `docker_kibot_windows.bat` or `docker_kibot_linux.sh` depending on your platform in [`kibot_resources/scripts`](kibot_resources/scripts). Currently tested on Windows and WSL2. This should pull and start a docker running the `dev` branch of KiBot. You should have access to your local files.
+2. For **KiCad 10**, the legacy Docker launchers accept `-v 10` and select `ghcr.io/inti-cmnb/kicad10_auto_full:1.9.1`. They retain their upstream broad filesystem mounts. For an initial read-only version check, use `docker_kibot_review.ps1`, which pins the tested image digest and mounts only the project. Perform generation on an isolated copy; see the [run notes](docs/compatibility/nano-full-run.md).
+
+**KiCad 10 (development target)**
+
+Windows:
+
+```powershell
+.\docker_kibot_windows.bat -v 10
+```
+
+Linux:
+
+```sh
+./docker_kibot_linux.sh -v 10
+```
+
+The following KiCad 8/9 commands are retained for legacy use. Their no-argument defaults do not select KiCad 10.
 
 ***
 **KiCad 8**

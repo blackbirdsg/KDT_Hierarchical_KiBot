@@ -131,12 +131,16 @@ if [[ -z "$revision" ]]; then
 fi
 
 # Check KiCad version and set group command accordingly
-kicad_version=$(kicad-cli --version)
-if [[ "$kicad_version" =~ ^9\.[0-9]+\.[0-9]+$ ]]; then
-    all_group="all_group_k9"
-else
-    all_group="all_group"
+if ! kicad_version=$(kicad-cli --version); then
+    echo "Unable to determine KiCad version." >&2
+    exit 1
 fi
+case "${kicad_version%%.*}" in
+    8) all_group="all_group" ;;
+    9) all_group="all_group_k9" ;;
+    10) all_group="all_group_k10" ;;
+    *) echo "Unsupported KiCad version: $kicad_version" >&2; exit 1 ;;
+esac
 
 # Handle server flag
 if [[ "$server_flag" == true ]]; then
@@ -180,7 +184,7 @@ fi
 
 # Execute the commands
 echo -e "${GREEN}Running: $kibot_command1${NC}"
-eval $kibot_command1
+eval $kibot_command1 || exit $?
 if [[ "$costs_flag" == false ]]; then
     echo -e "${GREEN}Running: $kibot_command2${NC}"
     eval $kibot_command2

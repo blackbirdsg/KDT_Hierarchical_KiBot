@@ -4,6 +4,8 @@
 
 <h1 align="center">${BOARD_NAME}</h1>
 
+Documentation generated with the **KiCad 10 compatibility development fork** of KDT Hierarchical KiBot. Reference environment: **KiCad 10.0.5 / KiBot 1.9.1**; check the current run log for actual tool versions. Generated files and lifecycle labels do not establish manufacturing readiness. The inherited KiCad 8/9 CI workflow has not been ported to KiCad 10.
+
 <p align="center" width="100%">
   <a href="${GIT_URL}/actions/workflows/ci.yaml">
     <img alt="CI Badge" src="${GIT_URL}/actions/workflows/ci.yaml/badge.svg?branch=">

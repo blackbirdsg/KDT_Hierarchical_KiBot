@@ -9,13 +9,15 @@ while getopts "v:" opt; do
         v)
             if [ "$OPTARG" = "9" ]; then
                 IMAGE="ghcr.io/inti-cmnb/kicad9_auto_full:dev"
+            elif [ "$OPTARG" = "10" ]; then
+                IMAGE="ghcr.io/inti-cmnb/kicad10_auto_full:1.9.1"
             else
                 echo "Unsupported version: $OPTARG" >&2
                 exit 1
             fi
             ;;
         *)
-            echo "Usage: $0 [-v 9]" >&2
+            echo "Usage: $0 [-v 9|10]" >&2
             exit 1
             ;;
     esac
