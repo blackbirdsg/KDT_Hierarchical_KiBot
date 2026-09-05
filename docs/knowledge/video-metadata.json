@@ -1,0 +1,20 @@
+{
+  "url": "https://www.youtube.com/watch?v=63R6Wnx44uY",
+  "retrieved": "2026-09-05",
+  "title": "KiCad 9 - Fully Automated Documentation Generation With CI/CD",
+  "author": "Vincent Nguyen",
+  "caption_tracks": [
+    {
+      "language": "en",
+      "kind": "not-labelled-asr"
+    },
+    {
+      "language": "en",
+      "kind": "asr"
+    }
+  ],
+  "transcript_stored": false,
+  "reason": "Full reproduction permission not established. Repository MIT licence is not assumed to cover the video.",
+  "caption_response_characters": 0,
+  "caption_response_is_json": false
+}

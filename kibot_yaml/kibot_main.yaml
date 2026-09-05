@@ -76,6 +76,11 @@ groups:
       - @HTML_KIRI_OUTPUT@
       - @HTML_NAV_RES_OUTPUT@
 
+  # Experimental local KiCad 10 alias; not an end-to-end certification.
+  - name: all_group_k10
+    outputs:
+      - all_group_k9
+
   - name: draft_group
     outputs:
       - @NETLIST_OUTPUT@
