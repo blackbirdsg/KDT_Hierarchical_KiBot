@@ -1,4 +1,6 @@
-# Repository-based workflow handbook
+# KiCad 10 workflow handbook
+
+This fork develops **KiCad 10 compatibility**. Its full local trial used **KiCad 10.0.5 and KiBot 1.9.1**. The architecture described below originates in the KiCad 8/9 upstream template; inherited CI behavior must not be mistaken for completed KiCad 10 CI support.
 
 Provenance: this handbook summarizes the MIT-licensed [upstream repository](https://github.com/nguyen-v/KDT_Hierarchical_KiBot/tree/079a4ecd0e4bd50d8df339bb6126caf9e9403bf6), reviewed 2026-09-05. It is not based on an obtained video transcript. Preserve upstream licence attribution when reusing its files.
 

@@ -1,5 +1,7 @@
 # Local development guidance
 
+Development target: **KiCad 10**, branch `kicad-compatibility`. The full local trial used KiCad 10.0.5 and KiBot 1.9.1. Keep documentation explicit about the distinction between tested local generation, failed board validation and the inherited KiCad 8/9 CI workflow.
+
 Read docs/README.md, docs/compatibility/kicad10-review.md and docs/compatibility/migration-plan.md before extending this branch. Workflow knowledge is in docs/knowledge/workflow-handbook.md. The video guide is not a transcript.
 
 Preserve the upstream MIT licence. Persistent local notes belong in docs/, because KiBot regenerates the root README. Use isolated copies for generation: preflights can modify project metadata and board drawings. Keep generated experiments in ignored .local-review/.

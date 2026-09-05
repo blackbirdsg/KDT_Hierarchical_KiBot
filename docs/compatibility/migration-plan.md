@@ -1,4 +1,6 @@
-# Migration and validation actions
+# KiCad 10 migration and validation actions
+
+Target: **KiCad 10**. The local full-output trial used **KiCad 10.0.5 / KiBot 1.9.1**; see [the run result](nano-full-run.md). This plan describes remaining qualification work beyond that trial, including CI migration.
 
 These are future implementation actions, not completed checks. Work on copies until the pipeline is qualified. They do not authorize further Nano design iterations or manufacturing submission.
 
